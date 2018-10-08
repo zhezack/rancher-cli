@@ -10,5 +10,6 @@ RUN apk add --no-cache ca-certificates \
     && rm rancher-linux-amd64-$CLI_VERSION.tar.gz \
     && wget https://storage.googleapis.com/kubernetes-release/release/$KUBECTL_VERSION/bin/linux/amd64/kubectl \
     && chmod +x kubectl \
-    && mv /kubectl /usr/bin/kubectl
+    && mv /kubectl /usr/bin/kubectl \
+    && mkdir ~/.rancher
 CMD ["/bin/sh"]
