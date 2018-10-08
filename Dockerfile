@@ -1,10 +1,14 @@
 FROM alpine:3.7
 
-ENV CLI_VERSION v0.6.11
+ENV CLI_VERSION v2.0.4
+ENV KUBECTL_VERSION v.1.6.4
 RUN apk add --no-cache ca-certificates \
-    && apk add --virtual build-dependencies curl \
-    && curl https://releases.rancher.com/cli/$CLI_VERSION/rancher-linux-amd64-$CLI_VERSION.tar.gz | tar -xz \
-    && mv /rancher-$CLI_VERSION/* /usr/bin/ \
+    && wget https://releases.rancher.com/cli/$CLI_VERSION/rancher-linux-amd64-$CLI_VERSION.tar.gz \
+    && tar -xvzf rancher-linux-amd64-$CLI_VERSION.tar.gz \
+    && mv /rancher-$CLI_VERSION/rancher /usr/bin/rancher \
     && rm -rf /rancher-$CLI_VERSION \
-    && apk del build-dependencies
+    && rm rancher-linux-amd64-$CLI_VERSION.tar.gz \
+    && wget https://storage.googleapis.com/kubernetes-release/release/$KUBECTL_VERSION/bin/linux/amd64/kubectl \
+    && chmod +x kubectl \
+    && mv /kubectl /usr/bin/kubectl
 CMD ["/bin/sh"]
