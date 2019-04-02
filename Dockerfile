@@ -1,6 +1,6 @@
 FROM alpine:3.7
 
-ENV CLI_VERSION v2.2.0
+ENV CLI_VERSION v2.0.6
 ENV KUBECTL_VERSION v1.14.0
 RUN apk add --no-cache ca-certificates \
     && wget https://releases.rancher.com/cli/$CLI_VERSION/rancher-linux-amd64-$CLI_VERSION.tar.gz \
